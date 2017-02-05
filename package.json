@@ -4,7 +4,9 @@
   "description": "Cors proxy for get requests",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "gulp"
   },
   "author": "",
   "license": "MIT",
