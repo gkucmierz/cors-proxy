@@ -32,6 +32,6 @@ http.createServer((request, response) => {
 });
 
 function forceCors(resp) {
-  resp.header('Access-Control-Allow-Origin', '*');
-  resp.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  resp.setHeader('Access-Control-Allow-Origin', '*');
+  resp.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 }
