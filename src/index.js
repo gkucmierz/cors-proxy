@@ -12,20 +12,24 @@ http.createServer((request, response) => {
   // remove host as it is taken from url
   delete options.headers.host;
 
-  hh.request(options, proxyRes => {
-    Object.keys(proxyRes.headers).map(key => {
-      response.setHeader(key, proxyRes.headers[key]);
-    });
-    forceCors(response);
+  try {
+    hh.request(options, proxyRes => {
+      Object.keys(proxyRes.headers).map(key => {
+        response.setHeader(key, proxyRes.headers[key]);
+      });
+      forceCors(response);
 
-    proxyRes.on('data', chunk => {
-      response.write(chunk, 'binary');
-    });
+      proxyRes.on('data', chunk => {
+        response.write(chunk, 'binary');
+      });
 
-    proxyRes.on('end', () => {
-      response.end();
-    });
-  }).end();
+      proxyRes.on('end', () => {
+        response.end();
+      });
+    }).end();
+  } catch (e) {
+    console.error(e);
+  }
 
 }).listen(port, () => {
   console.log('App now running on port ', port);
