@@ -1,18 +1,16 @@
 {
   "name": "cors-proxy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cors proxy for get requests",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js",
-    "dev": "gulp"
+    "start": "node src/index.js"
   },
-  "author": "",
+  "author": "Grzegorz Kućmierz",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.14.1",
-    "node-rest-client": "^2.0.1"
+    "http-https": "^1.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1"
