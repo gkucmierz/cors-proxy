@@ -2,6 +2,8 @@ const http = require('http');
 const hh = require('http-https');
 const Url = require('url');
 
+console.log(http.STATUS_CODES);
+
 const port = process.env.PORT || 5000;
 
 http.createServer((request, response) => {
@@ -12,7 +14,9 @@ http.createServer((request, response) => {
   // remove host as it is taken from url
   delete options.headers.host;
 
-  let req = hh.request(options, proxyRes => {
+  options.method = request.method;
+
+  let proxyReq = hh.request(options, proxyRes => {
     Object.keys(proxyRes.headers).map(key => {
       response.setHeader(key, proxyRes.headers[key]);
     });
@@ -26,8 +30,14 @@ http.createServer((request, response) => {
       response.end();
     });
   });
-  req.on('error', err => console.log(err));
-  req.end();
+  proxyReq.on('error', err => console.log(err));
+
+  request.on('data', chunk => {
+    proxyReq.write(chunk, 'binary');
+  });
+  request.on('end', () => {
+    proxyReq.end();
+  });
 
 }).listen(port, () => {
   console.log('App now running on port ', port);
