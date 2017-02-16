@@ -1,12 +1,25 @@
 {
   "name": "cors-proxy",
-  "version": "1.0.1",
-  "description": "Cors proxy for get requests",
+  "version": "1.0.2",
+  "description": "Cors proxy for requests",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gkucmierz/cors-proxy.git"
+  },
+  "keywords": [
+    "cors-proxy",
+    "proxy",
+    "http",
+    "https",
+    "get",
+    "post",
+    "api"
+  ],
   "author": "Grzegorz Kućmierz",
   "license": "MIT",
   "dependencies": {
