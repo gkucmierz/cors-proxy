@@ -2,8 +2,6 @@ const http = require('http');
 const hh = require('http-https');
 const Url = require('url');
 
-console.log(http.STATUS_CODES);
-
 const port = process.env.PORT || 5000;
 
 http.createServer((request, response) => {
@@ -22,22 +20,12 @@ http.createServer((request, response) => {
     });
     forceCors(response);
 
-    proxyRes.on('data', chunk => {
-      response.write(chunk, 'binary');
-    });
-
-    proxyRes.on('end', () => {
-      response.end();
-    });
+    proxyRes.on('data', chunk => response.write(chunk, 'binary'));
+    proxyRes.on('end', () => response.end());
   });
   proxyReq.on('error', err => console.log(err));
-
-  request.on('data', chunk => {
-    proxyReq.write(chunk, 'binary');
-  });
-  request.on('end', () => {
-    proxyReq.end();
-  });
+  request.on('data', chunk => proxyReq.write(chunk, 'binary'));
+  request.on('end', () => proxyReq.end());
 
 }).listen(port, () => {
   console.log('App now running on port ', port);
